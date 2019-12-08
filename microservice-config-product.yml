@@ -1,0 +1,113 @@
+#注意：如果在记事本上编写，下面的缩进不要使用Tab来缩进，不然报错 
+spring:
+  profiles:
+    active: dev # 激活开发环境配置
+---
+server:
+  port: 8001
+mybatis:
+  # mybatis配置文件所在路径
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  # 所有Entity别名类所在包
+  type-aliases-package: com.mengxuegu.springcloud.entities
+  # mapper映射文件
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+#这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个
+spring:
+  profiles: dev # 开发环境
+  application:
+    name: microservice-product-config
+  datasource:
+    # 当前数据源操作类型
+    type: com.alibaba.druid.pool.DruidDataSource
+    # mysql驱动包
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springcloud_db01?serverTimezone=GMT%2B8 # 数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5 # 数据库连接池的最小维持连接数
+      initial-size: 5 # 初始化连接数
+      max-total: 5 # 最大连接数
+      max-wait-millis: 150 # 等待连接获取的最大超时时间
+
+
+eureka:
+  client:
+    # 服务注册，true
+    register-with-eureka: true
+    # 服务发现，true表示自己从Eureka服务中获取注册信息e
+    fetch-registry: true
+    # Eureka客户端与Eureka服务端的交互地址，集群版配置对方的地址
+    # 单机版配置自己（如果不配置则默认本机8761端口）
+    service-url:
+      defaultZone: http://eureka6001.com:6001/eureka/,http://eureka6002.com:6002/eureka/
+
+  instance:
+    # 注册服务ID
+    instance-id: ${spring.application.name}:${server.port}-hystrix
+    #访问路径就会显示成Ip地址
+    prefer-ip-address: true
+
+
+# 在被监控服务上添加暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+        
+---
+server:
+  port: 8001
+mybatis:
+  # mybatis配置文件所在路径
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  # 所有Entity别名类所在包
+  type-aliases-package: com.mengxuegu.springcloud.entities
+  # mapper映射文件
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+#这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个
+spring:
+  profiles: prod # 生产环境
+  application:
+    name: microservice-product-config
+  datasource:
+    # 当前数据源操作类型
+    type: com.alibaba.druid.pool.DruidDataSource
+    # mysql驱动包
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springcloud_db02?serverTimezone=GMT%2B8 # 数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5 # 数据库连接池的最小维持连接数
+      initial-size: 5 # 初始化连接数
+      max-total: 5 # 最大连接数
+      max-wait-millis: 150 # 等待连接获取的最大超时时间
+
+
+eureka:
+  client:
+    # 服务注册，true
+    register-with-eureka: true
+    # 服务发现，true表示自己从Eureka服务中获取注册信息e
+    fetch-registry: true
+    # Eureka客户端与Eureka服务端的交互地址，集群版配置对方的地址
+    # 单机版配置自己（如果不配置则默认本机8761端口）
+    service-url:
+      defaultZone: http://eureka6001.com:6001/eureka/,http://eureka6002.com:6002/eureka/
+
+  instance:
+    # 注册服务ID
+    instance-id: ${spring.application.name}:${server.port}-hystrix
+    #访问路径就会显示成Ip地址
+    prefer-ip-address: true
+
+
+# 在被监控服务上添加暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
