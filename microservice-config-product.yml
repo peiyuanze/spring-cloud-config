@@ -64,7 +64,7 @@ mybatis:
 spring:
   profiles: prod # 生产环境
   application:
-    name: microservice-product-config-bus11
+    name: microservice-product-config-bus
   datasource:
     # 当前数据源操作类型
     type: com.alibaba.druid.pool.DruidDataSource
