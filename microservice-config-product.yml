@@ -49,13 +49,6 @@ eureka:
     #访问路径就会显示成Ip地址
     prefer-ip-address: true
 
-
-# 在被监控服务上添加暴露端点
-management:
-  endpoints:
-    web:
-      exposure:
-        include: springcloud-bus
         
 ---
 server:
@@ -104,10 +97,3 @@ eureka:
     #访问路径就会显示成Ip地址
     prefer-ip-address: true
 
-
-# 在被监控服务上添加暴露端点
-management:
-  endpoints:
-    web:
-      exposure:
-        include: springcloud-bus
