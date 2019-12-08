@@ -41,7 +41,7 @@ eureka:
     # Eureka客户端与Eureka服务端的交互地址，集群版配置对方的地址
     # 单机版配置自己（如果不配置则默认本机8761端口）
     service-url:
-      defaultZone: http://eureka6001.com:6001/eureka/,http://eureka6002.com:6002/eureka/
+      defaultZone: http://eureka6001.com:6001/eureka/
 
   instance:
     # 注册服务ID
@@ -96,7 +96,7 @@ eureka:
     # Eureka客户端与Eureka服务端的交互地址，集群版配置对方的地址
     # 单机版配置自己（如果不配置则默认本机8761端口）
     service-url:
-      defaultZone: http://eureka6001.com:6001/eureka/,http://eureka6002.com:6002/eureka/
+      defaultZone: http://eureka6001.com:6001/eureka/
 
   instance:
     # 注册服务ID
